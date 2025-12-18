@@ -20,6 +20,7 @@ import {
   HealthCheckSchema,
   HealthResponseSchema,
 } from '../../../src/contracts/schemas.js';
+import { APP_VERSION } from '../../../src/shared/version.js';
 
 describe('PairSchema', () => {
   it('should validate valid pair symbols', () => {
@@ -429,7 +430,7 @@ describe('HealthResponseSchema', () => {
       status: 'healthy',
       timestamp: '2024-01-01T00:00:00Z',
       uptime: 3600,
-      version: '2.0.0',
+      version: APP_VERSION,
       checks: {
         database: { status: 'up', latency: 5 },
         redis: { status: 'up', latency: 2 },
@@ -445,7 +446,7 @@ describe('HealthResponseSchema', () => {
       status: 'degraded',
       timestamp: '2024-01-01T00:00:00Z',
       uptime: 3600,
-      version: '2.0.0',
+      version: APP_VERSION,
       checks: {
         database: { status: 'up' },
         redis: { status: 'down', message: 'Timeout' },

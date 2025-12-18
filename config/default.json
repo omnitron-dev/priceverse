@@ -1,7 +1,6 @@
 {
   "app": {
     "name": "priceverse",
-    "version": "2.0.0",
     "environment": "development",
     "port": 3000,
     "host": "0.0.0.0"

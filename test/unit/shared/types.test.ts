@@ -10,6 +10,7 @@ import {
   type SupportedExchange,
   type PairSymbol,
 } from '../../../src/shared/types.js';
+import { APP_VERSION } from '../../../src/shared/version.js';
 
 describe('Type Constants', () => {
   describe('SUPPORTED_EXCHANGES', () => {
@@ -226,7 +227,7 @@ describe('Type Constants', () => {
         status: 'healthy' as const,
         timestamp: '2024-01-01T00:00:00Z',
         uptime: 3600,
-        version: '2.0.0',
+        version: APP_VERSION,
         checks: {},
         latency: 10,
       };

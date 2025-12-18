@@ -15,11 +15,12 @@ import { CONFIG_SERVICE_TOKEN, type ConfigService } from '@omnitron-dev/titan/mo
 import { LOGGER_SERVICE_TOKEN, type ILoggerModule } from '@omnitron-dev/titan/module/logger';
 
 import { AppModule } from './app.module.js';
+import { APP_VERSION } from './shared/version.js';
 
 async function bootstrap() {
   const app = await Application.create(AppModule, {
     name: 'priceverse',
-    version: '2.0.0',
+    version: APP_VERSION,
   });
 
   const loggerModule = await app.container.resolveAsync<ILoggerModule>(LOGGER_SERVICE_TOKEN);
@@ -45,8 +46,9 @@ async function bootstrap() {
   logger.info({ host, port }, `Priceverse listening on http://${host}:${port}`);
   logger.info({ services: app.netron?.getServiceNames() ?? [] }, 'Services registered');
 
+  const versionBanner = `PRICEVERSE v${APP_VERSION}`.padStart(32).padEnd(46);
   console.log('\n╔══════════════════════════════════════════════════════════════╗');
-  console.log('║                    PRICEVERSE v2.0.0                         ║');
+  console.log(`║${versionBanner}║`);
   console.log('╠══════════════════════════════════════════════════════════════╣');
   console.log('║ Collectors: 6 exchanges (PM processes)                       ║');
   console.log('║ Aggregators: VWAP + OHLCV (PM processes)                     ║');

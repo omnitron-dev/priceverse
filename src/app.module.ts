@@ -44,7 +44,10 @@ import { PRICE_HISTORY_REPOSITORY, OHLCV_REPOSITORY } from './shared/tokens.js';
   imports: [
     // Titan Core Modules
     ConfigModule.forRoot({
-      schema: configSchema,
+      // Type assertion prevents TS2589 "Type instantiation is excessively deep" error
+      // caused by complex nested Zod schemas with deep type inference
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      schema: configSchema as any,
       sources: [
         { type: 'file', path: 'config/default.json', optional: true },
         { type: 'env', prefix: 'PRICEVERSE_', separator: '__' },

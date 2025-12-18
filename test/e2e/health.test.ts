@@ -6,7 +6,7 @@
  * not the custom HealthService. It returns a basic status response with:
  * - status: 'online' | 'offline'
  * - uptime: number (milliseconds)
- * - version: '2.0.0'
+ * - version: from package.json
  *
  * For detailed health checks (with component checks, timestamps, etc.),
  * use the HealthService RPC endpoint via /netron/invoke.
@@ -14,6 +14,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { setupTestServer } from './setup.js';
+import { APP_VERSION } from '../../src/shared/version.js';
 
 describe('E2E: Health Endpoint', () => {
   const testContext = setupTestServer(3001);
@@ -46,12 +47,12 @@ describe('E2E: Health Endpoint', () => {
       expect(['online', 'offline']).toContain(health.status);
     });
 
-    it('should return version 2.0.0', async () => {
+    it('should return version from package.json', async () => {
       const baseUrl = testContext.getBaseUrl();
       const response = await fetch(baseUrl + '/health');
       const health = await response.json();
 
-      expect(health.version).toBe('2.0.0');
+      expect(health.version).toBe(APP_VERSION);
     });
 
     it('should return uptime as a positive number', async () => {
@@ -92,7 +93,7 @@ describe('E2E: Health Endpoint', () => {
       healthChecks.forEach((health) => {
         expect(health).toHaveProperty('status');
         expect(health).toHaveProperty('version');
-        expect(health.version).toBe('2.0.0');
+        expect(health.version).toBe(APP_VERSION);
       });
     });
 

@@ -3,12 +3,13 @@
  */
 
 import { z } from 'zod';
+import { APP_VERSION } from '../shared/version.js';
 
 export const configSchema = z.object({
   // Application
   app: z.object({
     name: z.string().default('priceverse'),
-    version: z.string().default('2.0.0'),
+    version: z.string().default(APP_VERSION),
     environment: z
       .enum(['development', 'staging', 'production'])
       .default('development'),

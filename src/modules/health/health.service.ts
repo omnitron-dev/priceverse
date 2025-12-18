@@ -13,6 +13,7 @@ import {
   type DatabaseMetrics,
 } from '@omnitron-dev/titan/module/database';
 import type { HealthResponse, HealthCheck } from '../../shared/types.js';
+import { APP_VERSION } from '../../shared/version.js';
 import {
   BINANCE_COLLECTOR,
   KRAKEN_COLLECTOR,
@@ -127,7 +128,7 @@ export class HealthService {
       status,
       timestamp: new Date().toISOString(),
       uptime: Math.floor((Date.now() - this.startTime) / 1000),
-      version: '2.0.0',
+      version: APP_VERSION,
       checks,
       latency: Date.now() - startCheck,
       database: dbResult.details,
